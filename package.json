@@ -1,0 +1,19 @@
+{
+  "name": "invictum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanrolandoNuRi/Invictum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IanrolandoNuRi/Invictum/issues"
+  },
+  "homepage": "https://github.com/IanrolandoNuRi/Invictum#readme"
+}
