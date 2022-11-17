@@ -1,0 +1,59 @@
+//Commands for create django project
+pip install virtualenv --> install the virtual environment for  python 
+virtualenv --version --> see the version of virtual env
+virtualenv venv --> create virtual environment 
+.\venv\Scripts\activate --> active  the environment 
+
+Into the virtualenv run the command to install django:
+pip install django~=3.2.15
+
+django-admin --version --> test the django version
+python -m django --version --> django version
+django-admin startproject nombreproyecto . --> create the project
+python manage.py startapp datasheet --> create the modules 
+
+Into the virtualenv run the command to install psycopg2:
+pip install psycopg2 --> allow connect with postgres db 
+
+python manage.py makemigrations --> create the migrations of db with tables into models 
+python manage.py migrate --> create tables into db 
+python manage.py runserver --> run project 
+
+
+//DATABASE 
+\l --> List data bases 
+CREATE DATABASE namedatabase; --> command to create database
+\c namedatabase --> connect to database
+\d --> see if exist tables in database 
+\d nametable --> see structure table 
+
+GIT
+git pull --> download changes of branch 
+git fetch --> download changes similar to git pull 
+git branch --> see branchs 
+git branch -a --> see branchs as local and remote environment
+git checkout branchname --> change of branch 
+git checkout -b branchname --> create a new branch and change to new branch 
+git status --> see changes into actual branch
+git add . --> add changes into branch
+git tag -a nametag -m "message" --> create tag only used to local environment
+git commit -m "Message" --> create commit 
+git push origin namebranch --> upload changes to repository
+git merge namebranch --strategy-option theirs --> accept changes inccoming of branch fusion
+git merge namebranch --strategy-option ours --> I wanted to accept all current changes and ignore any incoming changes
+
+BOOTSTRAP
+mb --> margin bottom 
+mx --> margin horizontal
+my --> margin vertical
+mt --> margin top 
+#menu li > a --> this is used to put properties (a) when it is into li 
+w-50 --> width in bootstrap limitted to 50% 
+mx-auto --> margin horizontal center 
+text-center --> center 
+p-3 --> padding 
+fs-2 --> font size 
+border-top --> 
+pt-5 --> padding top 
+me --> margin left 
+ms --> margin right
