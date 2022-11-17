@@ -1,17 +1,14 @@
-on:
-  push:
-    branches:
-      -master
-name: Deploy website on CPanel
+on: push
+name: 🚀 Deploy website on push
 jobs:
-  FTP-deploy:
-    name: FTP-deploy
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v2.1.0
-      
-    - name: 📂 FTP-Deploy-Action
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ${{ secrets.FTP_SERVER }}
