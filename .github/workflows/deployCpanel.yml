@@ -1,0 +1,17 @@
+name: Deploy website on CPanel
+on:
+  push:
+    branches:
+      -master
+jobs:
+  FTP-deploy:
+    name: FTP-deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.1.0
+    - name: 📂FTP-Deploy-Action
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
