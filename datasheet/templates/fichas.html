@@ -1,0 +1,55 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<div class="clearfix"></div>
+<div class="orders">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="box-title ">LISTADO DE FICHAS</h4>
+                    <div class="col-md-4 mt-3">
+                        <!-- <button type="button" class="btn btn-success" onclick="abrir_modal_creacion('{% url 'ficha:create_datasheet' %}');">
+                            CREAR FICHA 
+                        </button> -->
+                        <a class="btn btn-success" href="{% url 'ficha:create_datasheet' %}">CREAR FICHA</a>
+                    </div>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table id="tabla_fichas" class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>NÚMERO FICHA</th>
+                                    <th>CÉDULA DE IDENTIDAD</th>
+                                    <th>CÓDIGO CATASTRAL ACTUAL</th>
+                                    <th>NUEVO CÓDIGO CATASTRAL</th>
+                                    <th>FECHA</th>
+                                    <th>OBSERVACIONES</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+</div>
+
+{% endblock %}
+{% block extrajs %}
+    <script src="{% static 'js/lib/data-table/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/ficha/ficha.js' %}"></script>
+{% endblock extrajs %}

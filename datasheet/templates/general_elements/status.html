@@ -1,0 +1,21 @@
+{% if estado_acometida.id == 1%}
+    <div class="col p-2 bg-success">
+        <div class=" row">
+            <p class="text-center text-light fw-bold">{{estado_acometida.estado_acometida_agua}}</p>
+        </div>
+    </div>
+{% endif %}
+{% if estado_acometida.id == 2%}
+<div class="col p-2 bg-danger">
+    <div class=" row">
+        <p class="text-center text-light fw-bold">{{estado_acometida.estado_acometida_agua}}</p>
+    </div>
+</div>
+{% endif %}
+{% if estado_acometida.id != 1 and estado_acometida.id != 2 %}
+<div class="col p-2 bg-warning">
+    <div class=" row">
+        <p class="text-center text-light fw-bold">{{estado_acometida.estado_acometida_agua}}</p>
+    </div>
+</div>
+{% endif %}

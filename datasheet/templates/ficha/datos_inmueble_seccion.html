@@ -1,0 +1,359 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    <label class="form-label fw-bold">7. DATOS DEL INMUEBLE</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">TIPO DE PREDIO</label>
+        {{ form4.tipo_predio | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE CONSTRUCCIÓN</label>
+        {{ form4.material_construccion | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">TIPO DE SERVICIO</label>
+        {{ form4.tipo_servicio | as_crispy_field }}
+    </div>
+</div>
+<div class="row mt-1">
+    <div class="col">
+        <label class="form-label fw-bold">NÚMERO DE PISOS</label>  
+        {{ form4.numero_pisos | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">HABITADA</label>
+        {{ form4.habitada | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ACTIVIDAD DEL PREDIO</label>
+        {{ form4.actividad_predio | as_crispy_field }}
+    </div>
+</div>
+<div class="row mt-1">
+    <div class="col">
+        <label class="form-label fw-bold">TIENE PISCINA</label>
+        {{ form4.tiene_piscina | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">NÚMERO DE PERSONAS</label>
+        {{ form4.numero_personas | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">FAMILIAS</label>
+        {{ form4.numero_familias | as_crispy_field }}
+    </div>
+</div>
+<div class="row mt-1">
+    <div class="col-4">
+        <label class="form-label fw-bold">POZO ARTESIANO</label>
+        {{ form4.pozo_artesiano | as_crispy_field }}
+    </div>
+    <div class="col-8">
+        <label class="form-label fw-bold">UNIDADES DE USO</label><br>
+        <div class="row">
+            <div class="col">
+                DOMÉSTICO {{ form4.unidades_domestico | as_crispy_field }}
+                PÚBLICO {{ form4.unidades_publico | as_crispy_field }}
+            </div>
+            <div class="col">
+                COMERCIAL {{ form4.unidades_comercial | as_crispy_field }}
+                INDUSTRIAL {{ form4.unidades_industrial | as_crispy_field }}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    <label class="form-label fw-bold">7. DATOS DEL INMUEBLE</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">TIPO DE PREDIO</label>
+        <select class="form-select" name="slc_tipo_predio" aria-label="default select" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_inmueble.tipo_predio_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el tipo de predio</option>
+            {% endif %}
+            {% for tipo_predio in tipo_predios %}
+                <option 
+                    value={{tipo_predio.id}}
+                    {% if tipo_predio.id == datos_inmueble.tipo_predio_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{tipo_predio.tipo_predio}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE CONSTRUCCIÓN</label>
+        <select class="form-select" aria-label="default select" name="slc_material_construccion" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_inmueble.material_construccion_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el material de construcción</option>
+            {% endif %}
+            {% for construccion_material in construccion_materiales %}
+                <option 
+                    value={{construccion_material.id}}
+                    {% if construccion_material.id == datos_inmueble.material_construccion_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{construccion_material.material_construccion}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">TIPO DE SERVICIO</label>
+        <select class="form-select" aria-label="default select" name="slc_tipo_servicio" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_inmueble.tipo_servicio_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el tipo de servicio</option>
+            {% endif %}
+            {% for servicio_tipo in servicio_tipos %}
+                <option 
+                    value={{servicio_tipo.id}}
+                    {% if servicio_tipo.id == datos_inmueble.tipo_servicio_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{servicio_tipo.tipo_servicio}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">NÚMERO DE PISOS</label>  
+        <div class="validacion_grupo" id="grupo__ipt_numero_pisos">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inNumeroPisos" 
+                    name="ipt_numero_pisos"
+                    {% if not edit_mode %}
+                        disabled
+                    {% endif %}
+                    maxlength="2"
+                    placeholder="Ingrese el número de pisos" 
+                    value="{% if datos_inmueble.numero_pisos%} {{datos_inmueble.numero_pisos}} {% endif %}"
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Este campo solo puede contener números.</p>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">HABITADA</label>
+        <div class="col-6">
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="rdo_habitada" 
+                    id="rd_habitada" 
+                    value="True" 
+                    {% if not edit_mode%} disabled {% endif %}
+                    {% if datos_inmueble.habitada == True %} checked {% endif %}
+                >
+                <label class="form-check-label" for="inlineRadio1">SI</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="rdo_habitada" 
+                    id="rd_habitada" 
+                    value="False" 
+                    {% if not edit_mode%} disabled {% endif %}
+                    {% if datos_inmueble.habitada == False or datos_inmueble.habitada != True %} checked {% endif %}
+                >
+                <label class="form-check-label" for="inlineRadio2">NO</label>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ACTIVIDAD DEL PREDIO</label>
+        <select class="form-select" aria-label="default select" name="slc_actividad_predio" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_inmueble.actividad_predio_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione la actividad del predio</option>
+            {% endif %}
+            {% for predio_actividad in predio_actividades %}
+                <option 
+                    value={{predio_actividad.id}}
+                    {% if predio_actividad.id == datos_inmueble.actividad_predio_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{predio_actividad.actividad_predio}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">TIENE PISCINA</label>
+        <div class="col-6">
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="rdo_piscina" 
+                    id="rd_piscina" 
+                    value="True" 
+                    {% if not edit_mode%} disabled {% endif %}
+                    {% if datos_inmueble.tiene_piscina == True %} checked {% endif %}
+                >
+                <label class="form-check-label" for="inlineRadio1">SI</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="rdo_piscina" 
+                    id="rd_piscina" 
+                    value="False" 
+                    {% if not edit_mode%} disabled {% endif %}
+                    {% if datos_inmueble.tiene_piscina == False or datos_inmueble.tiene_piscina != True %} checked {% endif %}
+                >
+                <label class="form-check-label" for="inlineRadio2">NO</label>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">NÚMERO DE PERSONAS</label>
+        <div class="validacion_grupo" id="grupo__ipt_numero_personas">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inNumeroPisos" 
+                    name="ipt_numero_personas" 
+                    maxlength="2" 
+                    placeholder="Ingrese el número de personas" 
+                    {% if not edit_mode%} 
+                        disabled 
+                    {% endif %} 
+                    value="{% if datos_inmueble.numero_personas%} {{datos_inmueble.numero_personas}} {% endif %}"
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Este campo solo puede contener números.</p>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">FAMILIAS</label>
+        <div class="validacion_grupo" id="grupo__ipt_numero_familias">
+            <div class="validacion_grupo-input">    
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inNumeroPisos" 
+                    name="ipt_numero_familias" 
+                    maxlength="2" 
+                    placeholder="Ingrese el número de familias" 
+                    {% if not edit_mode %} 
+                        disabled 
+                    {% endif %} 
+                    value="{% if datos_inmueble.numero_familias%} {{datos_inmueble.numero_familias}} {% endif %}"
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Este campo solo puede contener números.</p>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-4">
+        <label class="form-label fw-bold">POZO ARTESIANO</label>
+        <div class="col-6">
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="rdo_pozo_artesiano" 
+                    id="rd_pozo_artesiano" 
+                    value="True" 
+                    {% if not edit_mode%} disabled {% endif %}
+                    {% if datos_inmueble.pozo_artesiano == True %} checked {% endif %}
+                >
+                <label class="form-check-label" for="inlineRadio1">SI</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="rdo_pozo_artesiano" 
+                    id="rd_pozo_artesiano" 
+                    value="False" 
+                    {% if not edit_mode%} disabled {% endif %}
+                    {% if datos_inmueble.pozo_artesiano == False or datos_inmueble.pozo_artesiano != True %} checked {% endif %}
+                >
+                <label class="form-check-label" for="inlineRadio2">NO</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <label class="form-label fw-bold">UNIDADES DE USO</label>
+        <div class="row ">
+            <div class="col">DOMÉSTICO</div>
+            <div class="col">
+                <div class="validacion_grupo" id="grupo__ipt_uu_domestico">
+                    <div class="validacion_grupo-input">
+                        <input type="text" class="validacion_input" id="inUUDomestico" name="ipt_uu_domestico" maxlength="2" {% if not edit_mode%} disabled {% endif %} value="{% if datos_inmueble.unidades_domestico%} {{datos_inmueble.unidades_domestico}} {% endif %}">
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                        <p class="validacion_input-error">Este campo solo puede contener números.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">PÚBLICO</div>
+            <div class="col">
+                <div class="validacion_grupo" id="grupo__ipt_uu_publico">
+                    <div class="validacion_grupo-input">
+                        <input type="text" class="validacion_input" id="inUUPublico" name="ipt_uu_publico" maxlength="2" {% if not edit_mode%} disabled {% endif %} value="{% if datos_inmueble.unidades_publico%} {{datos_inmueble.unidades_publico}} {% endif %}">
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                        <p class="validacion_input-error">Este campo solo puede contener números.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">COMERCIAL</div>
+            <div class="col">
+                <div class="validacion_grupo" id="grupo__ipt_uu_comercial">
+                    <div class="validacion_grupo-input">
+                        <input type="text" class="validacion_input" id="inUUComercial" name="ipt_uu_comercial" maxlength="2" {% if not edit_mode%} disabled {% endif %} value="{% if datos_inmueble.unidades_comercial%} {{datos_inmueble.unidades_comercial}} {% endif %}">
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                        <p class="validacion_input-error">Este campo solo puede contener números.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row auto mt-2">
+            <div class="col">INDUSTRIAL</div>
+            <div class="col">
+                <div class="validacion_grupo" id="grupo__ipt_uu_industrial">
+                    <div class="validacion_grupo-input">
+                        <input type="text" class="validacion_input" id="inUUIndustrial" name="ipt_uu_industrial" maxlength="2" {% if not edit_mode%} disabled {% endif %} value="{% if datos_inmueble.unidades_industrial%} {{datos_inmueble.unidades_industrial}} {% endif %}">
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                        <p class="validacion_input-error">Este campo solo puede contener números.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

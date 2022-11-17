@@ -1,0 +1,39 @@
+body{
+    background: white;
+    color: black; 
+}
+
+
+div{
+    border-style: solid;
+    border-style: none;
+}
+
+/* .row{
+    border-style: solid;
+} */
+
+
+#flex{
+    border-style: solid;
+    display: flex;
+}
+
+#ficha_catastros{
+    max-width: auto;
+    margin: auto;
+}
+
+.container{
+    max-width: 100%;
+    margin: auto;
+}
+
+.nuevo_cod_catastral{
+    width: 11%;
+    font-size: 12px;
+}
+
+.col-6 .col-md-2 .row .form-select{
+    max-width: 50%;
+ }

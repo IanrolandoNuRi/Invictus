@@ -1,0 +1,60 @@
+{% load crispy_forms_tags %}
+<div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">10. DATOS DEL MARCO Y TAPA DE CAJA DE AGUA</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DEL MARCO Y TAPA</label>
+        {{ form7.material_marco_tapa | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE MARCO Y TAPA</label>
+        {{ form7.estado_marco_tapa | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">10. DATOS DEL MARCO Y TAPA DE CAJA DE AGUA</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DEL MARCO Y TAPA</label>
+        <select class="form-select" aria-label="default select" name="slc_material_marco_tapa" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_marco_tapa_caja_agua.estado_marco_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el material del marco y tapa</option>
+            {% endif %}
+            {% for marco_tapa_material in marco_tapa_materiales %}
+                <option 
+                    value={{marco_tapa_material.id}}
+                    {% if marco_tapa_material.id == datos_marco_tapa_caja_agua.material_marco_tapa_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{marco_tapa_material.material_marco_tapa}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE MARCO Y TAPA</label>
+        <select class="form-select" aria-label="default select" name="slc_estado_marco_tapa" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_marco_tapa_caja_agua.estado_marco_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el estado de marco y tapa</option> 
+            {% endif %}
+            {% for marco_tapa_estado in marco_tapa_estados %}
+                <option 
+                    value={{marco_tapa_estado.id}}
+                    {% if marco_tapa_estado.id == datos_marco_tapa_caja_agua.estado_marco_tapa_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{marco_tapa_estado.estado_marco_tapa}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div> -->

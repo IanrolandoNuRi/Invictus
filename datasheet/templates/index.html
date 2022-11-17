@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<div class="row justify-content-center align-items-center" style="height: 600px; background-color: white">
+    <div class="col-lg-12">
+        <div class="card bg-success me-5 mx-5">
+            <div class="card-body">
+                <blockquote class="blockquote mb-0 text-light text-center">
+                    <h1 class="text-light">¡{{ user.username | upper }} BIENVENIDO!</h1>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

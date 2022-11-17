@@ -1,0 +1,276 @@
+{% load crispy_forms_tags %}
+<div class="row">
+    <div class="col-11 p-2 bg-success fw-bold text-light mt-3">
+        <label class="form-label fw-bold">3. DATOS GENERALES DEL USUARIO</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="form-label fw-bold">ESTA REGISTRADO</label>
+            </div>
+            <div class="col-6">
+                {{ form.esta_registrado | as_crispy_field }}
+                <!-- {% if form.esta_registrado.errors %}
+                    {% for error in form.esta_registrado.errors %}
+                        <span class="mensaje_advertencia">{{ error | escape }}</span> 
+                    {% endfor %}
+                {% endif %} -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">Nº INCRIPCIÓN</label>
+            </div>
+            <div class="col-7">
+                {{ form.numero_inscripcion | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">CÓDIGO CATASTRAL ACTUAL</label>
+            </div>
+            <div class="col-7">
+                {{ form.clave_catastral_actual | as_crispy_field }}
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label fw-bold">NOMBRES Y APELLIDOS</label>
+            </div>
+            <div class="col-7">
+                {{ form.nombres_apellidos | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-4">
+                <label class="form-label fw-bold">DIRECCIÓN</label>
+            </div>
+            <div class="col-7">
+                {{ form.direccion | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label fw-bold">LUGAR</label>
+            </div>
+            <div class="col-7">
+                {{ form.barrio | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label fw-bold">CI/RUC</label>
+            </div>
+            <div class="col-7">
+                {{ form.cedula_identidad | as_crispy_field }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col-11 p-2 bg-success fw-bold text-light mt-3">
+        <label class="form-label fw-bold">3. DATOS GENERALES DEL USUARIO</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col-4 mt-2">
+                <label class="form-label fw-bold">ESTA REGISTRADO</label>
+            </div>
+            <div class="col-6 mt-2">
+                <div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="rdo_esta_registrado" 
+                        id="rd_esta_registrado" 
+                        value="True" 
+                        {% if datos_generales.esta_registrado == True %}
+                            checked 
+                        {% endif %}
+                        {% if not edit_mode %}
+                            disabled
+                        {% endif %}
+                    >
+                    <label class="form-check-label" for="inlineRadio1">SI</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="rdo_esta_registrado" 
+                        id="rd_esta_registrado" 
+                        value="False"
+                        {% if datos_generales.esta_registrado == False or datos_generales.esta_registrado != True %}
+                            checked 
+                        {% endif %}
+                        {% if not edit_mode%}
+                            disabled
+                        {% endif %}
+                    >
+                    <label class="form-check-label" for="inlineRadio2">NO</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">Nº INCRIPCIÓN</label>
+            </div>
+            <div class="col-7">
+                <div class="validacion_grupo" id="grupo__ipt_num_inscripcion">
+                    <div class="validacion_grupo-input">
+                        <input 
+                            type="text" 
+                            class="validacion_input" 
+                            id="inInscripcion" 
+                            name="ipt_num_inscripcion" 
+                            required 
+                            maxlength="4" 
+                            placeholder="Ingrese el número de inscripción"
+                            value="{% if datos_generales.numero_inscripcion%}{{datos_generales.numero_inscripcion}}{% endif %}"
+                            {% if not edit_mode%}
+                                disabled
+                            {% endif %}
+                        >
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                    <p class="validacion_input-error">Complete este campo, solo puede contener números y debe ser de máximo 4 dígitos.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">CÓDIGO CATASTRAL ACTUAL</label>
+            </div>
+            <div class="col-7">
+                <div class="validacion_grupo" id="grupo__ipt_codigo_actual">
+                    <div class="validacion_grupo-input">
+                        <input 
+                            type="text" 
+                            class="validacion_input mt-2" 
+                            id="inCodigoActual" 
+                            name="ipt_codigo_actual" 
+                            required 
+                            maxlength="15" 
+                            placeholder="Ingrese el código catastral actual"
+                            value="{%if datos_generales.clave_catastral_actual%}{{datos_generales.clave_catastral_actual}}{% endif %}"
+                            {% if not edit_mode%}
+                                disabled
+                            {% endif %}
+                        >
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                    <p class="validacion_input-error">Complete este campo, debe ser de 15 dígitos y solo puede contener números.</p>
+                </div>  
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label fw-bold">NOMBRES Y APELLIDOS</label>
+            </div>
+            <div class="col-7">
+                <div class="validacion_grupo" id="grupo__ipt_nombres_apellidos">
+                    <div class="validacion_grupo-input">
+                        <input 
+                            type="text" 
+                            class="validacion_input" 
+                            id="inNombres" 
+                            name="ipt_nombres_apellidos" 
+                            required 
+                            maxlength="180"
+                            placeholder="Ingrese los nombres y apellidos"
+                            value="{% if datos_responsableacometida.nombres_apellidos%}{{datos_responsableacometida.nombres_apellidos}}{% endif %}"
+                            {% if not edit_mode%}
+                                disabled
+                            {% endif %}
+                        >
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                    <p class="validacion_input-error">Complete este campo, solo puede contener letras.</p>
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">DIRECCIÓN</label>
+            </div>
+            <div class="col-7">
+                <div class="validacion_grupo" id="grupo__ipt_direccion">
+                    <div class="validacion_grupo-input">
+                        <input 
+                            type="text" 
+                            class="validacion_input" 
+                            id="inDireccion" 
+                            name="ipt_direccion" 
+                            required 
+                            maxlength="255"
+                            placeholder="Ingrese la dirección"
+                            value="{% if datos_generales.direccion%}{{datos_generales.direccion}}{% endif %}"
+                            {% if not edit_mode %}
+                                disabled
+                            {% endif %}
+                        >
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                    <p class="validacion_input-error">Complete este campo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">LUGAR</label>
+            </div>
+            <div class="col-7">
+                <div class="validacion_grupo" id="grupo__ipt_lugar">
+                    <div class="validacion_grupo-input">
+                        <input 
+                            type="text" 
+                            class="validacion_input mt-2" 
+                            id="inLugar" 
+                            name="ipt_lugar" 
+                            required 
+                            maxlength="80"
+                            placeholder="Ingrese el lugar"
+                            value="{% if datos_generales.barrio%}{{datos_generales.barrio}}{% endif %}"
+                            {% if not edit_mode %}
+                                disabled
+                            {% endif %}
+                        >
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                    <p class="validacion_input-error">Complete este campo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label mt-2 fw-bold">CI/RUC</label>
+            </div>
+            <div class="col-7">
+                <div class="validacion_grupo" id="grupo__ipt_ci_ruc">
+                    <div class="validacion_grupo-input">
+                        <input 
+                            type="text" 
+                            class="validacion_input mt-2" 
+                            id="inCI" 
+                            name="ipt_ci_ruc" 
+                            required 
+                            maxlength="13"
+                            placeholder="Ingrese el CI/RUC"     
+                            value="{% if datos_responsableacometida.cedula_identidad%}{{datos_responsableacometida.cedula_identidad}}{% endif %}"
+                            {% if not edit_mode%}
+                                disabled
+                            {% endif %}
+                        >
+                        <i class="validacion-estado fa fa-check"></i>
+                    </div>
+                    <p class="validacion_input-error">Complete este campo, debe tener mínimo 10 dígitos y solo puede contener números.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

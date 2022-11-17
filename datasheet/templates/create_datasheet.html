@@ -1,0 +1,1254 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ficha_catastral.css' %}" />
+<form action="/create-datasheet/" method="POST">
+    {% csrf_token %}
+    {% if edit_mode %}
+            <div class="container mt-4" id="edit_content" hidden>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-10"></div>
+                        <div class="col-sm p-2 fw-bold text-light d-flex justify-content-end">
+                            <button type="button" class="btn btn-success col" id="activeEdit">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endif %}
+    <div class="container mt-4" id="ficha-catastros">
+        <div class="container-fluid border border-dark">
+            <div class="row">
+                <div class="col-2 p-2 bg-success fw-bold text-light"></div>
+                <div class="col-8 p-2 bg-success fw-bold text-light">
+                    <div class=" row ">
+                        <p class="text-center">GOBIERNO AUTÓNOMO DESCENTRALIZADO MUNICIPAL DE ARCHIDONA 2019-2023</p>
+                    </div>
+                    <div class="row">
+                        <p class="text-center">
+                            FICHA CATASTRAL USUARIOS DE AGUA POTABLE, ALCANTARILLADO Y RECOLECCIÓN DE BASURA
+                        </p>
+                    </div>
+                </div>
+                <div class="col-2 p-2 bg-success fw-bold text-light">
+                    AQUI LOGO
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">AQUI LOGO</div>
+                <div class="col-6">
+                </div>
+                <div class="col-3">
+                    <div class="col p-2 bg-success fw-bold text-light mt-3">
+                        <label class="form-label fw-bold">1. NÚMERO DE FICHA</label>
+                    </div>
+                    <input 
+                        type="text" 
+                        class="form-control border-success" 
+                        id="numero-ficha" 
+                        name="ipt_numero_ficha"
+                        required 
+                        maxlength="9" 
+                        {% if not edit_mode%}
+                            disabled
+                        {% endif %}
+                        placeholder="Escriba el número de ficha"
+                    >
+                    <div class="col p-2 bg-success fw-bold text-light mt-3">
+                        <label class="form-label fw-bold">2. TIPO DE USUARIO</label>
+                    </div>
+                    <select 
+                        class="form-select border-success"
+                        name="slc_tipo_usuario"
+                        aria-label="default select"
+                        {% if not edit_mode%}
+                            disabled
+                        {% endif %}
+                    >
+                        <option value="" selected>Seleccione el tipo de usuario</option>
+                        {% for tipo_usuario in tipo_usuarios %}
+                            <option 
+                                value={{tipo_usuario.id}}
+                            >
+                                {{tipo_usuario.tipo_usuario}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 p-2 bg-success fw-bold text-light mt-3">
+                    <label class="form-label fw-bold">3. DATOS GENERALES DEL USUARIO</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label fw-bold">ESTA REGISTRADO</label>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-check form-check-inline">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="rdo_esta_registrado" 
+                                    id="rd_esta_registrado" 
+                                    value="True" 
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                                <label class="form-check-label" for="inlineRadio1">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input 
+                                    class="form-check-input" 
+                                    type="radio" 
+                                    name="rdo_esta_registrado" 
+                                    id="rd_esta_registrado" 
+                                    value="False"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                                <label class="form-check-label" for="inlineRadio2">NO</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label mt-2 fw-bold">Nº INCRIPCIÓN</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <input 
+                                    type="text" 
+                                    class="form-control mt-2 border-success" 
+                                    id="ipt_num_inscripcion" 
+                                    name="ipt_num_inscripcion" 
+                                    required 
+                                    maxlength="4" 
+                                    placeholder="Ingrese el número de inscripción"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label mt-3 fw-bold">CÓDIGO CATASTRAL ACTUAL</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <input 
+                                    type="text" 
+                                    class="form-control mt-3 border-success" 
+                                    id="inCodigoActual" 
+                                    name="ipt_codigo_actual" 
+                                    required 
+                                    maxlength="9" 
+                                    placeholder="Ingrese el código catastral actual"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label fw-bold">NOMBRES Y APELLIDOS</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inNombres" 
+                                    name="ipt_nombres_apellidos" 
+                                    required 
+                                    maxlength="9"
+                                    placeholder="Ingrese los nombres y apellidos"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label mt-2 fw-bold">DIRECCIÓN</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <input 
+                                    type="text" 
+                                    class="form-control mt-2 border-success" 
+                                    id="inDireccion" 
+                                    name="ipt_direccion" 
+                                    required 
+                                    maxlength="255"
+                                    placeholder="Ingrese la dirección"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label mt-2 fw-bold">LUGAR</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <input 
+                                    type="text" 
+                                    class="form-control mt-2 border-success" 
+                                    id="inLugar" 
+                                    name="ipt_lugar" 
+                                    required 
+                                    maxlength="9"
+                                    placeholder="Ingrese el lugar"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label mt-2 fw-bold">CI/RUC</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <input 
+                                    type="text" 
+                                    class="form-control mt-2 border-success" 
+                                    id="inCI" 
+                                    name="ipt_ci_ruc" 
+                                    required 
+                                    maxlength="13"
+                                    placeholder="Ingrese el CI/RUC"                                        
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <div class="row p-2 bg-success fw-bold text-light">
+                        <label class="form-label fw-bold">4. NUEVO CÓDIGO CATASTRAL</label>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inProvincia" 
+                                    name="ipt_provincia" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">PROVINCIA</p>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inCanton" 
+                                    name="ipt_canton" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">CANTÓN</p>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inParroquia" 
+                                    name="ipt_parroquia" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">PARROQUIA</p>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inZona" 
+                                    name="ipt_zona" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">ZONA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inSector" 
+                                    name="ipt_sector" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">SECTOR</p>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inManzana" 
+                                    name="ipt_manzana" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">MANZANA</p>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inPredio" 
+                                    name="ipt_predio" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">PREDIO</p>
+                            </div>
+                        </div>
+                        <div class="col mx-2">
+                            <div class="row justify-content-center">
+                                <input 
+                                    type="text" 
+                                    class="form-control border-success" 
+                                    id="inConexion" 
+                                    name="ipt_conexion" 
+                                    required 
+                                    maxlength="2"
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                            <div class="row mt-3">
+                                <p class="text-center">CONEXIÓN</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+                    <label class="form-label fw-bold">6. RESPONSABLE DEL PREDIO</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-3">
+                    <div class="row">
+                        {% for predio_responsable in predio_responsables %}
+                            <div class="col-1">
+                                <p class="text-center">{{predio_responsable.responsable_predio}}</p>
+                            </div>
+                            <div class="col-1">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    id="tipo_usuario"
+                                    name="rdo_responsable_predio"
+                                    value={{predio_responsable.id}}
+                                    {% if not edit_mode%}
+                                        disabled
+                                    {% endif %}
+                                >
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 bg-success fw-bold text-light">
+                    <label class="form-label fw-bold">7. DATOS DEL INMUEBLE</label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">TIPO DE PREDIO</label>
+                    <select class="form-select" name="slc_tipo_predio" aria-label="default select" 
+                        {% if not edit_mode%} disabled {% endif %}
+                    >
+                        <option value="" selected>Seleccione el tipo de predio</option>
+                        {% for tipo_predio in tipo_predios %}
+                            <option 
+                                value={{tipo_predio.id}}
+                            >
+                                {{tipo_predio.tipo_predio}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">MATERIAL DE CONSTRUCCIÓN</label>
+                    <select class="form-select" name="slc_material_construccion" aria-label="default select" 
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione el material de construcción</option>
+                        {% for construccion_material in construccion_materiales %}
+                            <option 
+                                value={{construccion_material.id}}
+                            >
+                                {{construccion_material.material_construccion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">TIPO DE SERVICIO</label>
+                    <select class="form-select" name="slc_tipo_servicio" aria-label="default select" 
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione el tipo de servicio</option>
+                        {% for servicio_tipo in servicio_tipos %}
+                            <option 
+                                value={{servicio_tipo.id}}
+                            >
+                                {{servicio_tipo.tipo_servicio}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">NÚMERO DE PISOS</label>  
+                    <input type="text" class="form-control border-success" id="inNumeroPisos" name="ipt_numero_pisos" maxlength="2" {% if not edit_mode%}disabled{% endif %} placeholder="Ingrese el número de pisos">
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">HABITADA</label>
+                    <div class="col-6">
+                        <div class="form-check form-check-inline">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="rdo_habitada" 
+                                id="rd_habitada" 
+                                value="True" 
+                                {% if not edit_mode%} disabled {% endif %}
+                            >
+                            <label class="form-check-label" for="inlineRadio1">SI</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="rdo_habitada" 
+                                id="rd_habitada" 
+                                value="False" 
+                                {% if not edit_mode%} disabled {% endif %}
+                            >
+                            <label class="form-check-label" for="inlineRadio2">NO</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">ACTIVIDAD DEL PREDIO</label>
+                    <select class="form-select" name="slc_actividad_predio" aria-label="default select" 
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione la actividad del predio</option>
+                        {% for predio_actividad in predio_actividades %}
+                            <option 
+                                value={{predio_actividad.id}}
+                            >
+                                {{predio_actividad.actividad_predio}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">TIENE PISCINA</label>
+                    <div class="col-6">
+                        <div class="form-check form-check-inline">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="rdo_piscina" 
+                                id="rd_piscina" 
+                                value="True" 
+                                {% if not edit_mode%} disabled {% endif %}
+                            >
+                            <label class="form-check-label" for="inlineRadio1">SI</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="rdo_piscina" 
+                                id="rd_piscina" 
+                                value="False"
+                                checked
+                                {% if not edit_mode%} disabled {% endif %}
+                            >
+                            <label class="form-check-label" for="inlineRadio2">NO</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">NÚMERO DE PERSONAS</label>
+                    <input type="text" class="form-control border-success" id="inNumeroPisos" name="ipt_numero_personas" maxlength="2" {% if not edit_mode%} disabled {% endif %}>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">FAMILIAS</label>
+                    <input type="text" class="form-control border-success" id="inNumeroFamilias" name="ipt_numero_familias" maxlength="2" {% if not edit_mode%} disabled {% endif %}>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <label class="form-label fw-bold">POZO ARTESIANO</label>
+                    <div class="col-6">
+                        <div class="form-check form-check-inline">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="rdo_pozo_artesiano" 
+                                id="rd_pozo_artesiano" 
+                                value="True" 
+                                {% if not edit_mode%} disabled {% endif %}
+                            >
+                            <label class="form-check-label" for="inlineRadio1">SI</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="rdo_pozo_artesiano" 
+                                id="rd_pozo_artesiano" 
+                                value="False" 
+                                {% if not edit_mode%} disabled {% endif %}
+                            >
+                            <label class="form-check-label" for="inlineRadio2">NO</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="form-label fw-bold">UNIDADES DE USO</label>
+                    <select class="form-select" name="slc_unidad_uso" aria-label="default select" 
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione la unidad de uso</option>
+                        {% for uso_unidad in uso_unidades %}
+                            <option
+                                value={{uso_unidad.id}}
+                            >
+                                {{uso_unidad.unidades_uso}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+                    <label class="form-label fw-bold">8. DATOS DE CONEXIÓN DE AGUA POTABLE</label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">CARACTERISTICAS DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select" name="slc_caracteristica_conexion_ap"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione la característica de la conexión</option>
+                        {% for conexion_caracteristica in conexion_caracteristicas %}
+                            <option 
+                                value={{conexion_caracteristica.id}}
+                            >
+                                {{conexion_caracteristica.caracteristicas_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">DIÁMETRO DE LA CONEXIÓN</label>
+                    <select class="form-select" name="slc_diametro_conexion_ap" aria-label="default select" 
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione el diámetro de la conexión/option>
+                        {% for conexion_diametro in conexion_diametros %}
+                            <option 
+                                value={{conexion_diametro.id}}
+                            >
+                                {{conexion_diametro.diametro_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">MATERIAL DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select" name="slc_material_conexion_ap"
+                        {% if not edit_mode%} disabled {% endif %}
+                    >
+                        <option value="" selected>Seleccione el material de la conexión</option>
+                        {% for conexion_material in conexion_materiales %}
+                            <option 
+                                value={{conexion_material.id}}
+                            >
+                                {{conexion_material.material_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">SITUACIÓN DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select" name="slc_situacion_conexion_ap"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione la situación de la conexión</option>
+                        {% for conexion_situacion in conexion_situaciones %}
+                            <option 
+                                value={{conexion_situacion.id}}
+                            >
+                                {{conexion_situacion.situacion_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label class="form-label mt-3 fw-bold">FECHA DE INSTALACIÓN</label>
+                    <input type="date" class="form-control border-success" name="ipt_fecha_instalacion" id="lectura-medidor" 
+                        {% if not edit_mode%}disabled{% endif %} 
+                    >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+                    <label class="form-label fw-bold">9. DATOS DE LA CAJA DE AGUA</label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">UBICACIÓN DE CAJA</label>
+                    <select class="form-select" aria-label="default select" name="slc_ubicacion_caja"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione la ubicación de la caja</option>
+                        {% for caja_agua_ubicacion in caja_agua_ubicaciones %}
+                            <option 
+                                value={{caja_agua_ubicacion.id}}
+                            >
+                                {{caja_agua_ubicacion.ubicacion_caja_agua}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">MATERIAL DE LA CAJA</label>
+                    <select class="form-select" aria-label="default select" name="slc_material_caja"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione el material de la caja</option>
+                        {% for caja_material in caja_materiales %}
+                            <option 
+                                value={{caja_material.id}}
+                            >
+                                {{caja_material.material_caja}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">ESTADO DE LA CAJA</label>
+                    <select class="form-select" aria-label="default select" name="slc_estado_caja"
+                        {% if not edit_mode%} disabled {% endif %}
+                    >
+                        <option value="" selected>Seleccione el estado de la caja</option>
+                        {% for caja_estado in caja_estados %}
+                            <option 
+                                value={{caja_estado.id}}
+                            >
+                                {{caja_estado.estado_caja}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+                    <label class="form-label fw-bold">10. DATOS DEL MARCO Y TAPA DE CAJA DE AGUA</label>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">MATERIAL DEL MARCO Y TAPA</label>
+                    <select class="form-select" aria-label="default select" name="slc_material_marco_tapa"
+                        {% if not edit_mode%} disabled {% endif %}
+                    >
+                        <option value="" selected>Seleccione el material del marco y tapa</option>
+                        {% for marco_tapa_material in marco_tapa_materiales %}
+                            <option 
+                                value={{marco_tapa_material.id}}
+                            >
+                                {{marco_tapa_material.material_marco_tapa}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">ESTADO DE MARCO Y TAPA</label>
+                    <select class="form-select" aria-label="default select" name="slc_estado_marco_tapa"
+                        {% if not edit_mode %} disabled {% endif %}
+                    >
+                        <option value="" selected>Seleccione el estado de marco y tapa</option>
+                        {% for marco_tapa_estado in marco_tapa_estados %}
+                            <option 
+                                value={{marco_tapa_estado.id}}
+                            >
+                                {{marco_tapa_estado.estado_marco_tapa }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    11. DATOS DEL MEDIDOR
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label class="form-label fw-bold">NÚMERO DEL MEDIDOR</label>
+                    <input type="text" class="form-control border-success" id="numero-medidor" name="ipt_numero_medidor" {%if not edit_mode%}disabled{% endif %} placeholder="Ingrese el número de medidor">
+                    <label class="form-label mt-3 fw-bold">LECTURA</label>
+                    <input type="text" class="form-control border-success" id="lectura-medidor" name="ipt_lectura" {%if not edit_mode%}disabled{% endif %} placeholder="Ingrese la lectura">
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">MARCA DEL MEDIDOR</label>
+                    <input type="text" class="form-control border-success" id="marca-medidor" name="ipt_marca_medidor" {% if not edit_mode%}disabled{% endif %} placeholder="Ingrese la marca del medidor">
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" value="" id="marca-no-determinado" name="cek_nodeterminado" {% if not edit_mode%}disabled{% endif %}>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            No determinado
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">DIÁMETRO DEL MEDIDOR</label>
+                    <select class="form-select" aria-label="default select" name="slc_diametro_medidor"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione el diámetro</option>
+                        {% for medidor_diametro in medidor_diametros %}
+                            <option 
+                                value={{medidor_diametro.id}}
+                            >
+                                {{medidor_diametro.diametro_medidor}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label class="form-label mt-3 fw-bold">ESTADO DEL MEDIDOR</label>
+                    <select class="form-select" aria-label="default select" name="slc_estado_medidor"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione el estado</option>
+                        {% for medidor_estado in medidor_estados %}
+                            <option 
+                                value={{medidor_estado.id}}
+                            >
+                                {{medidor_estado.estado_medidor}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-4 mb-1">
+                <div class="col">
+                    <label class="form-label fw-bold">DATOS DE LOS ACCESORIOS</label>
+                    <div class="row ">
+                        <div class="col-4">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    {% for accesorio in accesorios %}
+                                        <tr>
+                                            <input type="hidden" id="ipt_accesorio_id" name="ipt_accesorio_id" value="{{accesorio.id}}">
+                                            <td>{{accesorio.descripcion_accesorio}}</td>
+                                            <!-- todo -->
+                                            <td>
+                                                <select class="form-select" aria-label="default select" name="slc_estado_accesorio"
+                                                    {% if not edit_mode%}disabled{% endif %} 
+                                                >
+                                                    <option value="" selected>Seleccione el estado</option>
+                                                    <option value="True">Bueno</option>
+                                                    <option value="False">Malo</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    12. DATOS DE CONEXIÓN DE ALCANTARILLADO
+                </div>
+            </div>
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">CARACTERÍSTICAS DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select" name="slc_caracteristicas_conexion_alc"
+                        {% if not edit_mode%}disabled{% endif %}
+                    >
+                        <option value="" selected>Seleccione la característica de la conexión</option>
+                        {% for alc_conexion_caracteristica in alc_conexion_caracteristicas %}
+                            <option 
+                                value={{alc_conexion_caracteristica.id}}
+                            >
+                                {{alc_conexion_caracteristica.caracteristica_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label class="form-label mt-3 fw-bold">FECHA DE INSTALACIÓN</label>
+                    <input type="date" class="form-control border-success" id="ipt_fecha_instalacion_alc" name="ipt_fecha_instalacion_alc" 
+                        {% if not edit_mode%}disabled{% endif %} placeholder="Ingrese la fecha de instalación">
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">DÍAMETRO DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select" name="slc_diametro_conexion_alc" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el díametro de la conexión</option>
+                        {% for alc_conexion_diametro in alc_conexion_diametros %}
+                            <option 
+                                value={{alc_conexion_diametro.id}}
+                            >
+                                {{alc_conexion_diametro.diametro_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label class="form-label mt-3 fw-bold">MATERIAL DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select" name="slc_material_conexion_alc" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el material de la conexión</option>
+                        {% for alc_conexion_material in alc_conexion_materiales %}
+                            <option 
+                                value={{alc_conexion_material.id}}
+                            >
+                                {{alc_conexion_material.material_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">SITUACIÓN DE LA CONEXIÓN</label>
+                    <select class="form-select" aria-label="default select"  name="slc_situacion_conexion_alc" 
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <option value="" selected>Seleccione la situación de la conexión</option>
+                        {% for alc_conexion_situacion in alc_conexion_situaciones %}
+                            <option 
+                                value={{alc_conexion_situacion.id}}
+                            >
+                                {{alc_conexion_situacion.situacion_conexion}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    13. DATOS DE LA CAJA DE REGISTRO DE DESAGÜE
+                </div>
+            </div>
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">UBICACIÓN DE CAJA</label>
+                    <select class="form-select" aria-label="default select" name="slc_ubicacion_caja_rd" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione la ubicación de la caja</option>
+                        {% for caja_residual_ubicacion in caja_residual_ubicaciones %}
+                            <option 
+                                value={{caja_residual_ubicacion.id}}
+                            >
+                                {{caja_residual_ubicacion.ubicacion_caja}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">MATERIAL DE LA CAJA</label>
+                    <select class="form-select" aria-label="default select" name="slc_material_caja_rd" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el material de la caja</option>
+                        {% for caja_residual_material in caja_residual_materiales %}
+                            <option 
+                                value={{caja_residual_material.id}}
+                            >
+                                {{caja_residual_material.material_caja}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">ESTADO DE LA CAJA</label>
+                    <select class="form-select" aria-label="default select" name="slc_estado_caja_rd" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el estado de la caja</option>
+                        {% for caja_residual_estado in caja_residual_estados %}
+                            <option 
+                                value={{caja_residual_estado.id}}
+                            >
+                                {{caja_residual_estado.estado_caja}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label me-4 mb-4 fw-bold">¿Tiene las descargas AASS y AALL separadas?</label>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="ipt_descargas_asss_all" 
+                            id="inlineRadio1"
+                            value="True" 
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="ipt_descargas_asss_all" 
+                            id="inlineRadio2"
+                            value="False" 
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    14. DATOS TAPA DE CAJA DE ALCANTARILLADO
+                </div>
+            </div>
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">MATERIAL DE TAPA</label>
+                    <select class="form-select" aria-label="default select" name="slc_material_tapa" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el material de tapa</option>
+                        {% for tapa_material in tapa_materiales %}
+                            <option 
+                                value={{tapa_material.id}}
+                            >
+                                {{tapa_material.material_tapa}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">ESTADO DE TAPA</label>
+                    <select class="form-select" aria-label="default select" name="slc_estado_tapa" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el estado de la tapa</option>
+                        {% for tapa_estado in tapa_estados %}
+                            <option 
+                                value={{tapa_estado.id}}
+                            >
+                                {{tapa_estado.estado_tapa}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    15. DATOS (SIN CONEXIÓN AGUA POTABLE/ALCANTARILLADO)
+                </div>
+            </div>
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">ABASTECIMIENTO DE AGUA</label>
+                    <select class="form-select" aria-label="default select" name="slc_abastecimiento_agua" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el abastecimiento de agua</option>
+                        {% for agua_potable_abastecimiento in agua_potable_abastecimientos %}
+                            <option 
+                                value={{agua_potable_abastecimiento.id}}
+                            >
+                                {{agua_potable_abastecimiento.abastecimiento_agua_potable}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">ALMACENAMIENTO DE AGUA</label>
+                    <select class="form-select" aria-label="default select" name="slc_almacenamiento_agua" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el almacenamiento de agua</option>
+                        {% for agua_potable_almacenamiento in agua_potable_almacenamientos %}
+                            <option 
+                                value={{agua_potable_almacenamiento.id}}
+                            >
+                                {{agua_potable_almacenamiento.almacenamiento_agua_potable}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">SANEAMIENTO</label>
+                    <select class="form-select" aria-label="default select" name="slc_saneamiento" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el saneamiento</option>
+                        {% for saneamiento in saneamientos %}
+                            <option 
+                                value={{saneamiento.id}}
+                            >
+                                {{saneamiento.descripcion_saneamiento}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row row-cols-lg-auto">
+                <div class="col-12">
+                    <label class="form-label fw-bold">HORAS DE ABASTECIMIENTO DE AGUA POTABLE:</label>
+                </div>
+                <div class="col-12 mb-4">
+                    <input type="text" class="form-control border-success" id="horas-abastecimiento" name="ipt_horas_abastecimiento" placeholder="Horas" {% if not edit_mode%}disabled{% endif %}>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    16. DATOS COMPLEMENTARIOS
+                </div>
+            </div>
+            <div class="row mt-3 mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">JARDÍN/HUERTO</label>
+                    <select class="form-select" aria-label="default select" name="slc_jardin_huerto" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el Jardín/Huerto</option>
+                        {% for jardin_huerto_tipo in jardin_huerto_tipos %}
+                            <option 
+                                value={{jardin_huerto_tipo.id}}
+                            >
+                                {{jardin_huerto_tipo.jardin_huerto}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">TIPO DE VEREDA</label>
+                    <select class="form-select" aria-label="default select" name="slc_tipo_vereda" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el tipo de la vereda</option>
+                        {% for vereda_tipo in vereda_tipos %}
+                            <option 
+                                value={{vereda_tipo.id}}
+                            >
+                                {{vereda_tipo.tipo_vereda}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">PAVIMENTO</label>
+                    <select class="form-select" aria-label="default select" name="slc_pavimento" {% if not edit_mode%}disabled{% endif %}>
+                        <option value="" selected>Seleccione el pavimento</option>
+                        {% for pavimento in pavimentos %}
+                            <option 
+                                value={{pavimento.id}}
+                            >
+                                {{pavimento.descripcion_pavimento}}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    17. RECOLECCIÓN DE BASURA
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label me-4 mt-3 fw-bold">TIENE RECOLECCIÓN DE BASURA EN SU PREDIO</label>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="rdo_tiene_recoleccion" 
+                            id="rd_tiene_recoleccion"
+                            value="true"  
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="rdo_tiene_recoleccion" 
+                            id="rd_tiene_recoleccion"
+                            value="false"  
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio2">No</label>
+                    </div>
+                    <br>
+                    <label class="form-label me-4 fw-bold">CLASIFICA SUS RESIDUOS DOMÉSTICOS</label>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="rdo_clasifica_residuos" 
+                            id="rd_clasifica_residuos"
+                            value="true"  
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="rdo_clasifica_residuos" 
+                            id="rd_clasifica_residuos"
+                            value="false" 
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio2">No</label>
+                    </div>
+                    <br>
+                    <label class="form-label me-4 mb-3 fw-bold">TIENE CONTENEDORES CERCANOS AL PREDIO</label>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="rdo_contenedores_cercanos" 
+                            id="rd_contenedores_cercanos"
+                            value="true"
+                            {% if not edit_mode%}disabled{% endif %}
+                        >
+                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input 
+                            class="form-check-input" 
+                            type="radio" 
+                            name="rdo_contenedores_cercanos" 
+                            id="rd_contenedores_cercanos"
+                            value="false" 
+                            {% if not edit_mode%}disabled{% endif %} 
+                        >
+                        <label class="form-check-label" for="inlineRadio2">No</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    18. CROQUIS PARA UBICAR LA CONEXIÓN
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-4">
+                    AQUI EL CROQUIS
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 bg-success fw-bold text-light">
+                    19. OBSERVACIONES
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-2 me-3 ms-3 mt-3 mb-4">
+                    <textarea class="form-control border-success" aria-label="With textarea" name="txa_observaciones" 
+                        {% if not edit_mode%}disabled{% endif %}
+                        placeholder="Ingrese las observaciones"   
+                    ></textarea>
+                </div>
+            </div>
+            <div class="row row-cols-lg-auto">
+                <div class="col-12">
+                    <label class="form-label fw-bold">20. FECHA DE ENCUESTA</label>
+                </div>
+                <div class="col-12 mb-4">
+                    <input type="date" class="form-control border-success" id="fecha-encuesta" name="ipt_fecha_encuesta" {% if not edit_mode%}disabled{% endif %}>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4" id="exit_edit_content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 p-2 fw-bold text-light d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary col-2" id="cancelEdit">Cancelar</button>
+                </div>
+                <div class="col-6 p-2 fw-bold text-light d-flex justify-content-center">
+                    <button type="button" class="btn btn-success col-2">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="{% static 'js/ficha_catastral.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/ficha_catastral.css' %}" />
+<form action="" method="POST">
+    {% csrf_token %}
+    {% if has_edit_permission%}
+        {% include 'ficha/edit_button_seccion.html' %}
+    {% endif %}
+    <div class="container mt-3" id="ficha-catastros">
+        <div class="container-fluid border border-dark">
+            
+            <div class="row">
+                {% include 'ficha/header_seccion.html' %}
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    {% include 'ficha/tipo_usuario_seccion.html' %}
+                </div>
+            </div>      
+            <div class="row">
+                <div class="col">
+                    {% include 'ficha/datos_generales_seccion.html' %}
+                </div>
+                <div class="col">
+                    {% include 'ficha/nuevo_codigo_seccion.html' %}
+                </div>
+            </div>
+            <div class="row">
+                {% include 'ficha/datos_inmueble_seccion.html' %}
+            </div>
+            <div class="row">
+                {% include 'ficha/recoleccion_basura_seccion.html' %}
+            </div>
+        </div>
+    </div>
+    {% if has_edit_permission%}
+        {% include 'ficha/guardar_cancelar_seccion.html' %}
+    {% endif %}
+</form>
+<script src="{% static 'js/ficha_catastral.js' %}"></script>
+{% endblock %}

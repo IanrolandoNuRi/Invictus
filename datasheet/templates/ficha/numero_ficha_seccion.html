@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">1. NÚMERO DE FICHA</label>
+</div>
+{{ form3.numero_ficha | as_crispy_field }}
+
+<!-- <div class="col p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">1. NÚMERO DE FICHA</label>
+</div>
+<div class="validacion_grupo" id="grupo__ipt_numero_ficha">
+    <div class="validacion_grupo-input">
+        <input 
+            type="text" 
+            class="validacion_input" 
+            id="numero-ficha" 
+            name="ipt_numero_ficha"
+            required 
+            maxlength="9" 
+            {% if not edit_mode%}
+                disabled
+            {% endif %}
+                
+            value="{% if fecha_conexion_agua_potable%}{{fecha_conexion_agua_potable}}{% endif %}"
+
+            {% if mode == 'save' %}
+                placeholder="Escriba el número de ficha"
+            {% endif %}
+        >
+        <i class="validacion-estado fa fa-check"></i>
+    </div>
+        <p class="validacion_input-error">Complete este campo, debe tener 9 dígitos y solo puede contener números.</p>
+</div> -->

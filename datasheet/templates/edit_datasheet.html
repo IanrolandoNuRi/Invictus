@@ -1,0 +1,110 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ficha_catastral.css' %}" />
+{% endblock extra_css %}
+{% block content %}
+<!-- <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Creación de Fichas</h2>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div> -->
+        <form method="POST" class="needs-validation" id="formulario" novalidate>
+            {% csrf_token %}
+            {% if has_edit_permission%}
+                {% include 'ficha/edit_button_seccion.html' %}
+            {% endif %}
+            <div class="container mt-4" id="ficha-catastros">
+                <div class="container-fluid border border-dark">
+                    <div class="row">
+                        {% include 'ficha/header_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-3">
+                            {% load static %} <image width="60%" height="90%" src="{% static 'media/logos_gadma/logo_iglesia.jpeg' %}"/>
+                        </div>
+                        <div class="col-6"></div>
+                        <div class="col-3">
+                            {% include 'ficha/numero_ficha_seccion.html' %}
+                            {% include 'ficha/tipo_usuario_seccion.html' %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {% include 'ficha/datos_generales_seccion.html' %}
+                        </div>
+                        <div class="col">
+                            {% include 'ficha/nuevo_codigo_seccion.html' %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/responsable_predio_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/datos_inmueble_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/datos_conexion_ap_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/datos_caja_agua_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/datos_marco_tapa_ca_seccion.html' %}
+                    </div>
+
+                    <div class="row mt-3">
+                        {% include 'ficha/datos_medidor_seccion.html' %}
+                    </div>
+
+                    <div class="row">
+                        {% include 'ficha/datos_conexion_alcantarillado_seccion.html' %}
+                    </div>
+
+                    <div class="row">
+                        {% include 'ficha/datos_caja_registro_desague_seccion.html' %}
+                    </div>
+
+                    <div class="row">
+                        {% include 'ficha/datos_tapa_caja_alcantarillado_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/datos_sin_conexion_ap_alc_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/datos_complementarios_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/recoleccion_basura_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/croquis_seccion.html' %}
+                    </div>
+                    
+                    <div class="row">
+                        {% include 'ficha/observaciones_seccion.html' %}
+                    </div>        
+                </div>
+            </div>
+
+            {% if has_edit_permission %}
+                {% include 'ficha/guardar_cancelar_seccion.html' %}
+            {% endif %}
+        </form>
+    <!-- </div>
+</div> -->
+<script src="{% static 'js/ficha_catastral.js' %}"></script>
+{% endblock %}

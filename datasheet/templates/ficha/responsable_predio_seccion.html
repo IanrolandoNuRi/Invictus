@@ -1,0 +1,46 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">6. RESPONSABLE DEL PREDIO</label>
+</div>
+
+<div class="row">
+    <div class="col mt-3">
+        <div class="row">
+            <div class="col-4">
+                {{ form3.responsable_predio | as_crispy_field }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">6. RESPONSABLE DEL PREDIO</label>
+</div>
+
+<div class="row">
+    <div class="col mt-3">
+        <div class="row">
+            {{ form3.responsable_predio | as_crispy_field }}
+            {% for predio_responsable in data.predio_responsables %}
+                <div class="col-1">
+                    <p class="text-center">{{predio_responsable.responsable_predio}}</p>
+                </div>
+                <div class="col-1">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        id="rd_usuario_activo"
+                        name="rdo_responsable_predio"
+                        value={{predio_responsable.id}}
+                        {% if predio_responsable.id == data.responsable_predio_id %}
+                            checked
+                        {% endif %}
+                        {% if not edit_mode%}
+                            disabled
+                        {% endif %}
+                    >
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> -->

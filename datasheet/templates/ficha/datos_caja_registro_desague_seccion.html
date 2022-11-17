@@ -1,0 +1,122 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    13. DATOS DE LA CAJA DE REGISTRO DE DESAGÜE
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">UBICACIÓN DE CAJA</label>
+        {{ form10.ubicacion_caja | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE LA CAJA</label>
+        {{ form10.material_caja | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE LA CAJA</label>
+        {{ form10.estado_caja | as_crispy_field }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="form-label me-4 mb-4 fw-bold">¿Tiene las descargas AASS y AALL separadas?</label>
+        <div class="form-check form-check-inline">
+            {{ form10.tiene_descargas_aass_aall | as_crispy_field }}
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    13. DATOS DE LA CAJA DE REGISTRO DE DESAGÜE
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">UBICACIÓN DE CAJA</label>
+        <select class="form-select" aria-label="default select" name="slc_ubicacion_caja_rd" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_caja_registro_desague.ubicacion_caja_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione la ubicación de la caja</option>
+            {% endif %}
+            {% for caja_residual_ubicacion in caja_residual_ubicaciones %}
+                <option 
+                    value={{caja_residual_ubicacion.id}}
+                    {% if caja_residual_ubicacion.id == datos_caja_registro_desague.ubicacion_caja_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{caja_residual_ubicacion.ubicacion_caja}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE LA CAJA</label>
+        <select class="form-select" aria-label="default select" name="slc_material_caja_rd" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_caja_registro_desague.material_caja_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el material de la caja</option>
+            {% endif %}
+            {% for caja_residual_material in caja_residual_materiales %}
+                <option 
+                    value={{caja_residual_material.id}}
+                    {% if caja_residual_material.id == datos_caja_registro_desague.material_caja_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{caja_residual_material.material_caja}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE LA CAJA</label>
+        <select class="form-select" aria-label="default select" name="slc_estado_caja_rd" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_caja_registro_desague.estado_caja_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el estado de la caja</option>
+            {% endif %}
+            {% for caja_residual_estado in caja_residual_estados %}
+                <option 
+                    value={{caja_residual_estado.id}}
+                    {% if caja_residual_estado.id == datos_caja_registro_desague.estado_caja_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{caja_residual_estado.estado_caja}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="form-label me-4 mb-4 fw-bold">¿Tiene las descargas AASS y AALL separadas?</label>
+        <div class="form-check form-check-inline">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="rdo_descargas_asss_all" 
+                id="inlineRadio1"
+                value="True" 
+                {% if not edit_mode%}disabled{% endif %}
+                {% if datos_caja_registro_desague.tiene_descargas_aass_aall == True %}checked{% endif %}
+            >
+            <label class="form-check-label" for="inlineRadio1">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="rdo_descargas_asss_all" 
+                id="inlineRadio2"
+                value="False" 
+                {% if not edit_mode%}disabled{% endif %}
+                {% if datos_caja_registro_desague.tiene_descargas_aass_aall == False or datos_generales.esta_registrado != True %}checked{% endif %}
+            >
+            <label class="form-check-label" for="inlineRadio2">No</label>
+        </div>
+    </div>
+</div> -->

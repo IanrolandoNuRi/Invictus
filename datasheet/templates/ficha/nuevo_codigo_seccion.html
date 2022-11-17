@@ -1,0 +1,249 @@
+{% load crispy_forms_tags %}
+<div class="row p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">4. NUEVO CÓDIGO CATASTRAL</label>
+</div>
+<div class="row mt-3">
+    <div class="col mx-2">
+        {{ form2.provincia | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">PROVINCIA</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        {{ form2.canton | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">CANTÓN</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        {{ form2.parroquia | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">PARROQUIA</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        {{ form2.zona | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">ZONA</p>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col mx-2">
+        {{ form2.sector | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">SECTOR</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        {{ form2.manzana | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">MANZANA</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        {{ form2.predio | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">PREDIO</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        {{ form2.conexion | as_crispy_field }}
+        <div class="row mt-3">
+            <p class="text-center fw-bold text-dark">CONEXIÓN</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="row p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">4. NUEVO CÓDIGO CATASTRAL</label>
+</div>
+<div class="row mt-3">
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_provincia">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inProvincia" 
+                    name="ipt_provincia" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.provincia%} {{nuevo_cod_catastral.provincia}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">PROVINCIA</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_canton">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inCanton" 
+                    name="ipt_canton" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.canton%} {{nuevo_cod_catastral.canton}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">CANTÓN</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_parroquia">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inParroquia" 
+                    name="ipt_parroquia" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.parroquia%} {{nuevo_cod_catastral.parroquia}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">PARROQUIA</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_zona">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inZona" 
+                    name="ipt_zona" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.zona%} {{nuevo_cod_catastral.zona}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">ZONA</p>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_sector">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inSector" 
+                    name="ipt_sector" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.sector%} {{nuevo_cod_catastral.sector}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>        
+        <div class="row mt-3">
+            <p class="text-center">SECTOR</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_manzana">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inManzana" 
+                    name="ipt_manzana" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.manzana%} {{nuevo_cod_catastral.manzana}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">MANZANA</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_predio">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inPredio" 
+                    name="ipt_predio" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.predio%} {{nuevo_cod_catastral.predio}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">PREDIO</p>
+        </div>
+    </div>
+    <div class="col mx-2">
+        <div class="validacion_grupo" id="grupo__ipt_conexion">
+            <div class="validacion_grupo-input">
+                <input 
+                    type="text" 
+                    class="validacion_input" 
+                    id="inConexion" 
+                    name="ipt_conexion" 
+                    required 
+                    maxlength="2"
+                    value="{% if nuevo_cod_catastral.conexion%} {{nuevo_cod_catastral.conexion}} {% endif %}"
+                    {% if not edit_mode%}
+                        disabled
+                    {% endif %}
+                >
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+                <p class="validacion_input-error">Complete este campo, debe tener 2 dígitos y solo puede contener números.</p>
+        </div>
+        <div class="row mt-3">
+            <p class="text-center">CONEXIÓN</p>
+        </div>
+    </div>
+</div> -->

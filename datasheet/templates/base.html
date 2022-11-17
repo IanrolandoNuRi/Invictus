@@ -1,0 +1,116 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- nuevo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Catastro</title>
+    <meta name="description" content="Catastro">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{% static 'images/logo.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{% static 'css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block extra_css %}
+    {% endblock extra_css %}
+    <title>Catastro</title>
+  </head>
+  <body>
+    {% include 'lateral_navbar.html' %}
+    <div id="right-panel" class="right-panel">
+      {% include 'navbar.html' %}
+      <div class="content">
+        {% block content %}
+
+        {% endblock %}
+      </div>
+
+      <div class="clearfix"></div>
+      <!-- Footer -->
+      <footer class="site-footer">
+          <div class="footer-inner bg-white">
+              <div class="row">
+                  <div class="col-sm-6">
+                      Copyright &copy; 2022
+                  </div>
+                  <div class="col-sm-6 text-right">
+                      Designed by <a href=""></a>
+                  </div>
+              </div>
+          </div>
+      </footer>
+      <!-- /.site-footer -->
+    </div>
+      
+    <!-- Scripts -->
+    <script>
+      (function() {
+        var $sidebar   = $("#sideBar-expanded"), 
+            $window    = $(window),
+            offset     = $sidebar.offset(),
+            topPadding = 15;
+
+        $window.scroll(function() {
+          console.log("scroll");
+            if ($window.scrollTop() > offset.top) {
+                $sidebar.stop().animate({
+                    marginTop: $window.scrollTop() - offset.top + topPadding
+                });
+            } else {
+                $sidebar.stop().animate({
+                    marginTop: 0
+                });
+            }
+        });
+      });
+    </script>
+    <script>
+      function closeNav() {
+        var side_navbar_expanded = document.getElementById("sideBar-expanded");
+        var side_navbar_reduce = document.getElementById("sideBar-reduce");
+        if(side_navbar_expanded.style.display === '' || side_navbar_expanded.style.display === 'block'){
+          side_navbar_expanded.style.display = "none";
+          side_navbar_reduce.style.display = "block";
+          return;
+        }
+        side_navbar_expanded.style.display = "block";
+        side_navbar_reduce.style.display = "none";
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+      {% for m in messages %}
+        <script>
+          Swal.fire({
+            "title": "¡Correcto!",
+            "text": "{{m}}",
+            "icon": "success"
+          })
+        </script>
+      {% endfor %}
+    {% endif %}
+    {% block extrajs %}
+    {% endblock extrajs %}
+  </body>
+</html>

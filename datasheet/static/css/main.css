@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body{
+    background: white;
+    color: black !important; 
+    margin: 0px;
+}
+
+.follow {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; 
+}
+
+.alert_color {
+	border: 0px; 
+	background: #F8D7DA !important;
+	font-size: 23px;
+}
+
+.mensaje_advertencia {
+	color: #e12433 !important;
+	font-size: 14px;
+}

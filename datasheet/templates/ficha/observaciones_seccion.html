@@ -1,0 +1,102 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    19. OBSERVACIONES
+</div>
+<div class="row">
+    <div class="col p-2 me-3 ms-3 mt-3 mb-4">
+        {{ form3.observaciones | as_crispy_field }}
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="form-label fw-bold">ES TERCERA EDAD</label>
+        <div class="form-check form-check-inline">
+            {{ form3.tercera_edad | as_crispy_field }}
+        </div>
+        <br>
+        <label class="form-label me-4 fw-bold">POSEE CARNÉ CONADIS</label>
+        <div class="form-check form-check-inline">
+            {{ form3.tiene_carne_conadis | as_crispy_field }}
+        </div>
+    </div>
+</div>
+<div class="row row-cols-lg-auto">
+    <div class="col-12">
+        <label class="form-label fw-bold">20. FECHA DE ENCUESTA</label>
+    </div>
+    <div class="col-12 mb-4">
+        {{ form3.fecha_encuesta | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    19. OBSERVACIONES
+</div>
+<div class="row">
+    <div class="col p-2 me-3 ms-3 mt-3 mb-4">
+        <textarea class="form-control border-success" aria-label="With textarea" name="txa_observaciones" {% if not edit_mode%}disabled{% endif %} placeholder="Ingrese las observaciones">{% if data.observaciones%} {{data.observaciones}} {% endif %}</textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="form-label fw-bold">ES TERCERA EDAD</label>
+        <div class="form-check form-check-inline">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="rdo_tercera_edad" 
+                id="rd_tercera_edad"
+                value="True"  
+                {% if not edit_mode%}disabled{% endif %}
+                {% if data.tercera_edad == True %} checked {% endif %}
+            >
+            <label class="form-check-label" for="inlineRadio1">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="rdo_tercera_edad" 
+                id="rd_tercera_edad"
+                value="False"  
+                {% if not edit_mode%}disabled{% endif %}
+                {% if data.tercera_edad == False or datos_generales.esta_registrado != True %} checked {% endif %}
+            >
+            <label class="form-check-label" for="inlineRadio2">No</label>
+        </div>
+        <br>
+        <label class="form-label me-4 fw-bold">POSEE CARNÉ CONADIS</label>
+        <div class="form-check form-check-inline">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="rdo_carne_conadis" 
+                id="rd_carne_conadis"
+                value="True"  
+                {% if not edit_mode%}disabled{% endif %}
+                {% if data.tiene_carne_conadis == True %} checked {% endif %}
+            >
+            <label class="form-check-label" for="inlineRadio1">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="rdo_carne_conadis" 
+                id="rd_carne_conadis"
+                value="False" 
+                {% if not edit_mode%}disabled{% endif %}
+                {% if data.tiene_carne_conadis == False or datos_generales.esta_registrado != True %} checked {% endif %}
+            >
+            <label class="form-check-label" for="inlineRadio2">No</label>
+        </div>
+    </div>
+</div>
+<div class="row row-cols-lg-auto">
+    <div class="col-12">
+        <label class="form-label fw-bold">20. FECHA DE ENCUESTA</label>
+    </div>
+    <div class="col-12 mb-4">
+        <input type="date" class="form-control border-success" id="fecha-encuesta" name="ipt_fecha_encuesta" {% if not edit_mode%}disabled{% endif %} value="{% if fecha_encuesta%}{{fecha_encuesta}}{% endif %}">
+    </div>
+</div> -->

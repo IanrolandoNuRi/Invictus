@@ -1,0 +1,60 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    14. DATOS TAPA DE CAJA DE ALCANTARILLADO
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE TAPA</label>
+        {{ form11.material_tapa | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE TAPA</label>
+        {{ form11.estado_tapa | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    14. DATOS TAPA DE CAJA DE ALCANTARILLADO
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE TAPA</label>
+        <select class="form-select" aria-label="default select" name="slc_material_tapa" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_tapa_caja_alcantarillado.material_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el material de tapa</option>
+            {% endif %}
+            {% for tapa_material in tapa_materiales %}
+                <option 
+                    value={{tapa_material.id}}
+                    {% if tapa_material.id == datos_tapa_caja_alcantarillado.material_tapa_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{tapa_material.material_tapa}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE TAPA</label>
+        <select class="form-select" aria-label="default select" name="slc_estado_tapa" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_tapa_caja_alcantarillado.estado_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el estado de la tapa</option>
+            {% endif %}
+            {% for tapa_estado in tapa_estados %}
+                <option 
+                    value={{tapa_estado.id}}
+                    {% if tapa_estado.id == datos_tapa_caja_alcantarillado.estado_tapa_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{tapa_estado.estado_tapa}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div> -->

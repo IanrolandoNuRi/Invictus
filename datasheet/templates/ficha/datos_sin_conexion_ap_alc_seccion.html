@@ -1,0 +1,106 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    15. DATOS (SIN CONEXIÓN AGUA POTABLE/ALCANTARILLADO)
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">ABASTECIMIENTO DE AGUA</label>
+        {{ form12.abastecimiento_agua | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ALMACENAMIENTO DE AGUA</label>
+        {{ form12.almacenamiento_agua | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">SANEAMIENTO</label>
+        {{ form12.saneamiento | as_crispy_field }}
+    </div>
+</div>
+<div class="row row-cols-lg-auto">
+    <div class="col-12">
+        <label class="form-label fw-bold">HORAS DE ABASTECIMIENTO DE AGUA POTABLE:</label>
+    </div>
+    <div class="col-12 mb-4">
+        {{ form12.numero_horas_abastecimiento | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    15. DATOS (SIN CONEXIÓN AGUA POTABLE/ALCANTARILLADO)
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">ABASTECIMIENTO DE AGUA</label>
+        <select class="form-select" aria-label="default select" name="slc_abastecimiento_agua" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_sin_conexion_agua_alcantarillado.abastecimiento_agua_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el abastecimiento de agua</option>
+            {% endif %}
+            {% for agua_potable_abastecimiento in agua_potable_abastecimientos %}
+                <option 
+                    value={{agua_potable_abastecimiento.id}}
+                    {% if agua_potable_abastecimiento.id == datos_sin_conexion_agua_alcantarillado.abastecimiento_agua_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{agua_potable_abastecimiento.abastecimiento_agua_potable}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ALMACENAMIENTO DE AGUA</label>
+        <select class="form-select" aria-label="default select" name="slc_almacenamiento_agua" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_sin_conexion_agua_alcantarillado.almacenamiento_agua_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el almacenamiento de agua</option>
+            {% endif %}
+            {% for agua_potable_almacenamiento in agua_potable_almacenamientos %}
+                <option 
+                    value={{agua_potable_almacenamiento.id}}
+                    {% if agua_potable_almacenamiento.id == datos_sin_conexion_agua_alcantarillado.almacenamiento_agua_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{agua_potable_almacenamiento.almacenamiento_agua_potable}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">SANEAMIENTO</label>
+        <select class="form-select" aria-label="default select" name="slc_saneamiento" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_sin_conexion_agua_alcantarillado.saneamiento_id %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el saneamiento</option>
+            {% endif %}
+            {% for saneamiento in saneamientos %}
+                <option 
+                    value={{saneamiento.id}}
+                    {% if saneamiento.id == datos_sin_conexion_agua_alcantarillado.saneamiento_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{saneamiento.descripcion_saneamiento}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="row row-cols-lg-auto">
+    <div class="col-12">
+        <label class="form-label fw-bold">HORAS DE ABASTECIMIENTO DE AGUA POTABLE:</label>
+    </div>
+    <div class="col-12 mb-4">
+        <div class="validacion_grupo" id="grupo__ipt_horas_abastecimi">
+            <div class="validacion_grupo-input">
+                <input type="text" class="validacion_input" id="horas-abastecimiento" name="ipt_horas_abastecimi" placeholder="Horas" maxlength="2" {% if not edit_mode%}disabled{% endif %} value="{% if datos_sin_conexion_agua_alcantarillado.numero_horas_abastecimiento%} {{datos_sin_conexion_agua_alcantarillado.numero_horas_abastecimiento}} {% endif %}">
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+            <p class="validacion_input-error">Este campo solo puede contener números.</p>
+        </div>
+    </div>
+</div> -->

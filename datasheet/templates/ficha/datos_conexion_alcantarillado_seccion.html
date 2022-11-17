@@ -1,0 +1,154 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    12. DATOS DE CONEXIÓN DE ALCANTARILLADO
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">CARACTERÍSTICAS DE LA CONEXIÓN</label>
+        <div class="row">
+            <div class="col">
+                Sin caja y conexión directa
+            </div>
+            <div class="col">
+                {{ form9.sin_caja_conexion_directa | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Con caja sin medidor
+            </div>
+            <div class="col">
+                {{ form9.con_caja_sin_medidor | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Con caja y con medidor
+            </div>
+            <div class="col">
+                {{ form9.con_caja_con_medidor | as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Sin conexión
+            </div>
+            <div class="col">
+                {{ form9.sin_conexion | as_crispy_field }}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">DÍAMETRO DE LA CONEXIÓN</label>
+        {{ form9.diametro_conexion | as_crispy_field }}
+        <label class="form-label mt-3 fw-bold">MATERIAL DE LA CONEXIÓN</label>
+        {{ form9.material_conexion | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">SITUACIÓN DE LA CONEXIÓN</label>
+        {{ form9.situacion_conexion | as_crispy_field }}
+        <label class="form-label mt-3 fw-bold">FECHA DE INSTALACIÓN</label>
+        {{ form9.fecha_instalacion | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    12. DATOS DE CONEXIÓN DE ALCANTARILLADO
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">CARACTERÍSTICAS DE LA CONEXIÓN</label>
+        <div class="row">
+            <div class="col">
+                Sin caja y conexión directa
+            </div>
+            <div class="col">
+                <input class="form-check-input border border-secondary" type="checkbox" value="" id="ipt_sin_caja_conexion" name="ipt_sin_caja_conexion_directa" {% if not edit_mode%}disabled{% endif %} {% if datos_conexion_alcantarillado.sin_caja_conexion_directa%}checked{% endif %}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Con caja sin medidor
+            </div>
+            <div class="col">
+                <input class="form-check-input border border-secondary" type="checkbox" value="" id="ipt_con_caja_sin_medidor" name="ipt_con_caja_sin_medidor" {% if not edit_mode%}disabled{% endif %} {% if datos_conexion_alcantarillado.con_caja_sin_medidor%}checked{% endif %}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Con caja y con medidor
+            </div>
+            <div class="col">
+                <input class="form-check-input border border-secondary" type="checkbox" value="" id="ipt_con_caja_con_medidor" name="ipt_con_caja_con_medidor" {% if not edit_mode%}disabled{% endif %} {% if datos_conexion_alcantarillado.con_caja_con_medidor%}checked{% endif %}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Sin conexión
+            </div>
+            <div class="col">
+                <input class="form-check-input border border-secondary" type="checkbox" value="" id="ipt_sin_conexion_alc" name="ipt_sin_conexion_alc" {% if not edit_mode%}disabled{% endif %} {% if datos_conexion_alcantarillado.sin_conexion%}checked{% endif %}>
+            </div>
+        </div>
+        <label class="form-label mt-3 fw-bold">FECHA DE INSTALACIÓN</label>
+        <input type="date" class="form-control border-success" id="ipt_fecha_instalacion_alc" name="ipt_fecha_instalacion_alc" {% if not edit_mode%}disabled{% endif %} value="{% if fecha_conexion_alcantarillado%}{{fecha_conexion_alcantarillado}}{% endif %}">
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">DÍAMETRO DE LA CONEXIÓN</label>
+        <select class="form-select" aria-label="default select" name="slc_diametro_conexion_alc" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_conexion_alcantarillado.diametro_conexion_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el díametro de la conexión</option>
+            {% endif %}
+            {% for alc_conexion_diametro in alc_conexion_diametros %}
+                <option 
+                    value={{alc_conexion_diametro.id}}
+                    {% if alc_conexion_diametro.id == datos_conexion_alcantarillado.diametro_conexion_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{alc_conexion_diametro.diametro_conexion}}
+                </option>
+            {% endfor %}
+        </select>
+        <label class="form-label mt-3 fw-bold">MATERIAL DE LA CONEXIÓN</label>
+        <select class="form-select" aria-label="default select" name="slc_material_conexion_alc" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_conexion_alcantarillado.material_conexion_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el material de la conexión</option>
+            {% endif %}
+            {% for alc_conexion_material in alc_conexion_materiales %}
+                <option 
+                    value={{alc_conexion_material.id}}
+                    {% if alc_conexion_material.id == datos_conexion_alcantarillado.material_conexion_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{alc_conexion_material.material_conexion}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">SITUACIÓN DE LA CONEXIÓN</label>
+        <select class="form-select" aria-label="default select" name="slc_situacion_conexion_alc" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_conexion_alcantarillado.situacion_conexion_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione la situación de la conexión</option>
+            {% endif %}
+            {% for alc_conexion_situacion in alc_conexion_situaciones %}
+                <option 
+                    value={{alc_conexion_situacion.id}}
+                    {% if alc_conexion_situacion.id == datos_conexion_alcantarillado.situacion_conexion_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{alc_conexion_situacion.situacion_conexion}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div> -->

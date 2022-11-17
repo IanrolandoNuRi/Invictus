@@ -1,0 +1,84 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    16. DATOS COMPLEMENTARIOS
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">JARDÍN/HUERTO</label>
+        {{ form13.jardin_huerto | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">TIPO DE VEREDA</label>
+        {{ form13.pavimento | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">PAVIMENTO</label>
+        {{ form13.tipo_vereda | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    16. DATOS COMPLEMENTARIOS
+</div>
+<div class="row mt-3 mb-4">
+    <div class="col">
+        <label class="form-label fw-bold">JARDÍN/HUERTO</label>
+        <select class="form-select" aria-label="default select" name="slc_jardin_huerto" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_complementarios.jardin_huerto_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el Jardín/Huerto</option>
+            {% endif %}
+            {% for jardin_huerto_tipo in jardin_huerto_tipos %}
+                <option 
+                    value={{jardin_huerto_tipo.id}}
+                    {% if jardin_huerto_tipo.id == datos_complementarios.jardin_huerto_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{jardin_huerto_tipo.jardin_huerto}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">TIPO DE VEREDA</label>
+        <select class="form-select" aria-label="default select" name="slc_tipo_vereda" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_complementarios.tipo_vereda_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el tipo de la vereda</option>
+            {% endif %}
+            {% for vereda_tipo in vereda_tipos %}
+                <option 
+                    value={{vereda_tipo.id}}
+                    {% if vereda_tipo.id == datos_complementarios.tipo_vereda_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{vereda_tipo.tipo_vereda}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">PAVIMENTO</label>
+        <select class="form-select" aria-label="default select" name="slc_pavimento" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_complementarios.pavimento_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el pavimento</option>
+            {% endif %}
+            {% for pavimento in pavimentos %}
+                <option 
+                    value={{pavimento.id}}
+                    {% if pavimento.id == datos_complementarios.pavimento_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{pavimento.descripcion_pavimento}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div> -->

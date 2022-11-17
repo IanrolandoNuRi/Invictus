@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">2. TIPO DE USUARIO</label>
+</div>
+{{ form3.tipo_usuario | as_crispy_field }}
+
+
+<!-- <div class="col p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">2. TIPO DE USUARIO</label>
+</div>
+<select 
+    class="form-select border-success"
+    name="slc_tipo_usuario"
+    aria-label="default select"
+    {% if not edit_mode%}
+        disabled
+    {% endif %}
+>
+    {% if not data.tipo_usuario_id and mode == 'view' %}
+        <option value="" selected>Sin información</option>
+    {% elif mode == 'save' or mode == 'edit' %}
+        <option value="" selected>Seleccione el tipo de usuario</option>
+    {% endif %}
+    {% for tipo_usuario in tipo_usuarios %}
+        <option 
+            value={{tipo_usuario.id}}
+            {% if tipo_usuario.id == data.tipo_usuario_id %}
+                selected
+            {% endif %}
+        >{{tipo_usuario.tipo_usuario}}</option>
+    {% endfor %}
+</select> -->

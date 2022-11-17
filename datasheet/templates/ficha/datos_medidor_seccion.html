@@ -1,0 +1,241 @@
+{% load crispy_forms_tags %}
+<div class="col p-2 bg-success fw-bold text-light">
+    11. DATOS DEL MEDIDOR
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">NÚMERO DEL MEDIDOR</label>
+        {{ form8.numero_medidor | as_crispy_field }}
+        <label class="form-label fw-bold">LECTURA</label>
+        {{ form8.lectura | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MARCA DEL MEDIDOR</label>
+        {{ form8.marca_medidor | as_crispy_field }}
+        <div class="form-check mt-3">
+            {{ form8.no_determinado | as_crispy_field }}
+            <label class="form-check-label">
+                No determinado
+            </label>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">DIÁMETRO DEL MEDIDOR</label>
+        {{ form8.diametro_medidor | as_crispy_field }}
+    </div>
+</div>
+<div class="row mt-4 mb-1">
+    <div class="col-7">
+        <label class="form-label fw-bold">DATOS DE LOS ACCESORIOS</label>
+        <div class="row table-responsive">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>1. Niple estándar</td>
+                        <td>
+                            {{ form8.estado_niple_estandar | as_crispy_field }}
+                        </td>
+                        <td>4. Codo</td>
+                        <td>
+                            {{ form8.estado_codo | as_crispy_field }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2. Llave de paso</td>
+                        <td>
+                            {{ form8.estado_llave_paso | as_crispy_field }}
+                        </td>
+                        <td>5. Tubo de salida</td>
+                        <td>
+                            {{ form8.estado_tubo_salida | as_crispy_field }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3. Directo</td>
+                        <td>
+                            {{ form8.estado_directo | as_crispy_field }}
+                        </td>
+                        <td>6. Tubo de entrada</td>
+                        <td>
+                            {{ form8.estado_tubo_entrada | as_crispy_field }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-4">
+        <label class="form-label fw-bold ">ESTADO DEL MEDIDOR</label>
+        <div class="row">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 25%">Operativo</td>
+                        <td>
+                            {{ form8.operativo | as_crispy_field }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Luna opaca</td>
+                        <td>
+                            {{ form8.luna_opaca | as_crispy_field }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Luna Rota</td>
+                        <td>
+                            {{ form8.luna_rota | as_crispy_field }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sin tapa</td>
+                        <td>
+                            {{ form8.sin_tapa | as_crispy_field }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Malogrado</td>
+                        <td>
+                            {{ form8.malogrado | as_crispy_field }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="col p-2 bg-success fw-bold text-light">
+    11. DATOS DEL MEDIDOR
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">NÚMERO DEL MEDIDOR</label>
+        <div class="validacion_grupo" id="grupo__ipt_numero_medidor">
+            <div class="validacion_grupo-input">
+                <input type="text" class="validacion_input" id="numero-medidor" name="ipt_numero_medidor" maxlength="10" {% if not edit_mode%}disabled{% endif %} value="{% if datos_medidor.numero_medidor%} {{datos_medidor.numero_medidor}} {% endif %}" placeholder="Ingrese el n�mero de medidor">
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+            <p class="validacion_input-error">Este campo solo puede contener n�meros.</p>
+        </div>
+        <label class="form-label mt-3 fw-bold">LECTURA</label>
+        <div class="validacion_grupo" id="grupo__ipt_lectura">
+            <div class="validacion_grupo-input">
+                <input type="text" class="validacion_input" id="lectura-medidor" name="ipt_lectura" maxlength="10" {% if not edit_mode%}disabled{% endif %} value="{% if datos_medidor.lectura%} {{datos_medidor.lectura}} {% endif %}" placeholder="Ingrese la lectura">
+                <i class="validacion-estado fa fa-check"></i>
+            </div>
+            <p class="validacion_input-error">Este campo solo puede contener n�meros.</p>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MARCA DEL MEDIDOR</label>
+        <input type="text" class="form-control border-success" id="marca-medidor" name="ipt_marca_medidor" {% if not edit_mode%}disabled{% endif %} value="{% if datos_medidor.marca_medidor%} {{datos_medidor.marca_medidor}} {% endif %}" placeholder="Ingrese la marca del medidor">
+        <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="True" id="marca-no-determinado" name="cek_nodeterminado" {% if not edit_mode%}disabled{% endif %} {% if datos_medidor.no_determinado%}checked{% endif %}>
+            <label class="form-check-label" for="flexCheckDefault">
+                No determinado
+            </label>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">DI�METRO DEL MEDIDOR</label>
+        <select class="form-select" aria-label="default select" name="slc_diametro_medidor" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_medidor.diametro_medidor_id and mode == 'view' %}
+                <option value="" selected>Sin informaci�n</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el di�metro</option>
+            {% endif %}
+            {% for medidor_diametro in medidor_diametros %}
+                <option 
+                    value={{medidor_diametro.id}}
+                    {% if medidor_diametro.id == datos_medidor.diametro_medidor_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{medidor_diametro.diametro_medidor}}
+                </option>
+            {% endfor %}
+        </select>
+        
+    </div>
+</div>
+<div class="row mt-4 mb-1">
+    <div class="col  ">
+        <label class="form-label fw-bold">DATOS DE LOS ACCESORIOS</label>
+        <div class="row ">
+            <div class="col-8">
+                <table class="table table-borderless">
+                    <tbody>
+                        {% for accesorio in accesorios %}
+                            <tr>
+                                <input type="hidden" id="ipt_accesorio_id" name="ipt_accesorio_id" value="{{accesorio.id}}">
+                                <td>{{accesorio.descripcion_accesorio}}</td>
+                                <td>
+                                    <select class="form-select" aria-label="default select" name="slc_estado_accesorio" {% if not edit_mode%}disabled{% endif %}>
+                                        {% for medidor_accesorio in medidor_accesorios %}
+                                            {% if medidor_accesorio.accesorio_id == accesorio.id %}
+                                                <option value="True" {% if medidor_accesorio.estado_accesorio %}selected{% endif %}>Bueno</option>
+                                                <option value="False" {% if not medidor_accesorio.estado_accesorio %}selected{% endif %}>Malo</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold ">ESTADO DEL MEDIDOR</label>
+        <div class="row">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 25%">
+                            <p>Operativo</p>
+                        </td>
+                        <td>
+                            <input class="form-check-input border border-secondary" type="checkbox" value="True" id="ipt_datos_medidor_operativo" name="ipt_datos_medidor_operativo" {% if not edit_mode %} disabled {% endif %} {% if datos_medidor.operativo %} checked {% endif %}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Luna opaca</p>
+                        </td>
+                        <td>
+                            <input class="form-check-input border border-secondary" type="checkbox" value="True" id="ipt_datos_medidor_luna_opaca" name="ipt_datos_medidor_luna_opaca" {% if not edit_mode %} disabled {% endif %} {% if datos_medidor.luna_opaca %} checked {% endif %}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Luna Rota</p>
+                        </td>
+                        <td>
+                            <input class="form-check-input border border-secondary" type="checkbox" value="True" id="datos-medidor-luna_rota" name="ipt_datos_medidor_luna_rota" {% if not edit_mode %} disabled {% endif %} {% if datos_medidor.luna_rota%} checked {% endif %}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Sin tapa</p>
+                        </td>
+                        <td>
+                            <input class="form-check-input border border-secondary" type="checkbox" value="True" id="datos-medidor-sin_tapa" name="ipt_datos_medidor_sin_tapa" {% if not edit_mode %} disabled {% endif %} {% if datos_medidor.sin_tapa %} checked {% endif %}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Malogrado</p>
+                        </td>
+                        <td>
+                            <input class="form-check-input border border-secondary " type="checkbox" value="True" id="datos-medidor-malogrado" name="ipt_datos_medidor_malogrado" {% if not edit_mode %} disabled {% endif %} {% if datos_medidor.malogrado %} checked {% endif %}>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->

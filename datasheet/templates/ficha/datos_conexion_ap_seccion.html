@@ -1,0 +1,28 @@
+{% load crispy_forms_tags %}
+<div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold">8. DATOS DE CONEXIÓN DE AGUA POTABLE</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">CARACTERISTICAS DE LA CONEXIÓN</label>
+        {{ form5.caracteristicas_conexion | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">DIÁMETRO DE LA CONEXIÓN</label>
+        {{ form5.diametro_conexion | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE LA CONEXIÓN</label>
+        {{ form5.material_conexion | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">SITUACIÓN DE LA CONEXIÓN</label>
+        {{ form5.situacion_conexion | as_crispy_field }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <label class="form-label mt-3 fw-bold">FECHA DE INSTALACIÓN</label>
+        {{ form5.fecha_instalacion | as_crispy_field }}
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="orders">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="box-title">Fichas </h4>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="serial">CI/RUC</th>
+                                    <th>NOMBRES Y APELLIDOS</th>
+                                    <th>CÓDIGO CATASTRAL ACTUAL</th>
+                                    {% if buscar_tipo == 1 %}
+                                        <th>Nº INCRIPCIÓN</th>
+                                        <th>DIRECCIÓN</th>
+                                        <th>LUGAR</th>
+                                    {% endif %}
+                                    <th>NUEVO CÓDIGO CATASTRAL</th>
+                                    <th>Ver ficha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for dat in tbdatos %}
+                                    <tr>
+                                        <td>{{ dat.responsableacometida.cedula_identidad }}</td>
+                                        <td>{{ dat.responsableacometida.nombres_apellidos }}</td>
+                                        <td>{{ dat.fichatecnica.datos_generales_usuario.clave_catastral_actual }}</td>
+                                        {%if buscar_tipo == 1%}
+                                            <td>{{ dat.fichatecnica.datos_generales_usuario.numero_inscripcion }}</td>
+                                            <td>{{ dat.fichatecnica.datos_generales_usuario.direccion }}</td>
+                                            <td>{{ dat.fichatecnica.datos_generales_usuario.barrio }}</td>
+                                        {%endif%}
+                                        <td>{{dat.provincia}}{{dat.canton}}{{ dat.parroquia }}{{ dat.zona }}{{ dat.sector }}{{ dat.manzana }}{{ dat.predio }}{{ dat.conexion }}</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/ficha/coordinacion-agua/{{ dat.id }}">ver ficha agua</a>
+                                            <a class="btn btn-primary" href="/ficha/coordinacion-agua/{{ dat.id }}">ver ficha alc</a>
+                                            <a class="btn btn-primary" href="/ficha/coordinacion-desechos-solidos/{{ dat.id }}">ver ficha desechos</a>
+                                            {%if buscar_tipo == 1%}
+                                                <a class="btn btn-primary" href="/ficha/coordinacion-agua/nueva-acometida/{{ dat.id }}">Generar nueva acometida</a>
+                                            {%endif%}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div> <!-- /.table-stats -->
+                </div>
+            </div> <!-- /.card -->
+        </div>  <!-- /.col-lg-8 -->
+    </div>
+</div>

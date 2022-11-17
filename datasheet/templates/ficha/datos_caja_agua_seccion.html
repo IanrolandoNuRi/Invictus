@@ -1,0 +1,84 @@
+{% load crispy_forms_tags %}
+<div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold"> 9. DATOS DE LA CAJA DE AGUA</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">UBICACIÓN DE CAJA</label>
+        {{ form6.ubicacion_caja_agua | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE LA CAJA</label>
+        {{ form6.material_caja | as_crispy_field }}
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE LA CAJA</label>
+        {{ form6.estado_caja | as_crispy_field }}
+    </div>
+</div>
+
+<!-- <div class="col-12 p-2 bg-success fw-bold text-light mt-3">
+    <label class="form-label fw-bold"> 9. DATOS DE LA CAJA DE AGUA</label>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <label class="form-label fw-bold">UBICACIÓN DE CAJA</label>
+        <select class="form-select" aria-label="default select" name="slc_ubicacion_caja" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_marco_tapa_caja_agua.estado_marco_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione la ubicación de la caja</option>
+            {% endif %}
+            {% for caja_agua_ubicacion in caja_agua_ubicaciones %}
+                <option 
+                    value={{caja_agua_ubicacion.id}}
+                    {% if caja_agua_ubicacion.id == datos_caja_agua.ubicacion_caja_agua_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{caja_agua_ubicacion.ubicacion_caja_agua}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">MATERIAL DE LA CAJA</label>
+        <select class="form-select" aria-label="default select" name="slc_material_caja" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_marco_tapa_caja_agua.estado_marco_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el material de la caja</option>
+            {% endif %}
+            {% for caja_material in caja_materiales %}
+                <option 
+                    value={{caja_material.id}}
+                    {% if caja_material.id == datos_caja_agua.material_caja_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{caja_material.material_caja}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <label class="form-label fw-bold">ESTADO DE LA CAJA</label>
+        <select class="form-select" aria-label="default select" name="slc_estado_caja" {% if not edit_mode%}disabled{% endif %}>
+            {% if not datos_marco_tapa_caja_agua.estado_marco_tapa_id and mode == 'view' %}
+                <option value="" selected>Sin información</option>
+            {% elif mode == 'save' or mode == 'edit' %}
+                <option value="" selected>Seleccione el estado de la caja</option>
+            {% endif %}
+            {% for caja_estado in caja_estados %}
+                <option 
+                    value={{caja_estado.id}}
+                    {% if caja_estado.id == datos_caja_agua.estado_caja_id %}
+                        selected
+                    {% endif %}
+                >
+                    {{caja_estado.estado_caja}}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</div> -->
